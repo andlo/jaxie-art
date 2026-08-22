@@ -129,8 +129,9 @@ function openLightbox(item) {
   lbDownload.href = item.src;
   lbDownload.download = item.src.split("/").pop();
   const title = encodeURIComponent(`Remove: ${item.title}`);
+  const imgUrl = `https://andlo.github.io/sonias-drawings/${item.src}`;
   const body = encodeURIComponent(
-    `Please remove this drawing from the gallery.\n\nFile: \`${item.src}\`\nDate: ${item.date}\n\n(Do not edit the File line above — it's used to find and delete the file automatically.)`
+    `Please remove this drawing from the gallery.\n\n![preview](${imgUrl})\n\nFile: \`${item.src}\`\nDate: ${item.date}\n\n(Do not edit the File line above — it's used to find and delete the file automatically.)`
   );
   lbRemove.href = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}&labels=remove-request`;
   lightbox.classList.remove("hidden");
