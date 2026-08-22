@@ -1,4 +1,4 @@
-name: Handle removal request
+name: Execute approved removal
 
 on:
   issues:
@@ -9,10 +9,8 @@ permissions:
   issues: write
 
 jobs:
-  remove:
-    if: >
-      github.event.label.name == 'remove-request' &&
-      contains(fromJSON('["andlo"]'), github.event.issue.user.login)
+  execute:
+    if: github.event.label.name == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +31,7 @@ jobs:
             git config user.name "sonias-drawings-bot"
             git config user.email "actions@github.com"
             git rm "$FILE"
-            git commit -m "Remove drawing requested in #${{ github.event.issue.number }}"
+            git commit -m "Remove drawing (approved in #${{ github.event.issue.number }})"
             git push
           fi
 
@@ -46,29 +44,11 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: "Removed `${{ steps.extract.outputs.file }}` from the gallery. This will disappear from the live site within a minute or two."
+              body: "Approved and removed `${{ steps.extract.outputs.file }}`. This will disappear from the live site within a minute or two."
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
               state: "closed"
-            });
-
-  flag-for-review:
-    if: >
-      github.event.label.name == 'remove-request' &&
-      !contains(fromJSON('["andlo"]'), github.event.issue.user.login)
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: "Thanks for flagging this. This request needs manual review before the image is removed — add the 'approved' label to proceed."
             });
