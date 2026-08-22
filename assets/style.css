@@ -120,16 +120,19 @@ body {
 .lightbox-meta { color: #f0ece0; text-align: center; }
 .license-note { font-size: .8rem; opacity: .8; }
 .license-note a { color: var(--accent-2); }
-.download-btn {
+.download-btn, .remove-btn {
   display: inline-block;
   margin-top: .3rem;
+  margin-right: .5rem;
   padding: .5rem 1.2rem;
-  background: var(--accent);
   color: white;
   text-decoration: none;
   border-radius: 8px;
   font-weight: 600;
 }
+.download-btn { background: var(--accent); }
+.remove-btn { background: #555; font-size: .85rem; opacity: .8; }
+.remove-btn:hover { opacity: 1; }
 .lightbox-close {
   position: absolute;
   top: 1.2rem;

@@ -115,10 +115,12 @@ function makeThumb(item) {
   return div;
 }
 
+const REPO = "andlo/sonias-drawings";
 const lightbox = document.getElementById("lightbox");
 const lbImg = document.getElementById("lightbox-img");
 const lbDate = document.getElementById("lightbox-date");
 const lbDownload = document.getElementById("lightbox-download");
+const lbRemove = document.getElementById("lightbox-remove");
 
 function openLightbox(item) {
   lbImg.src = item.src;
@@ -126,6 +128,11 @@ function openLightbox(item) {
   lbDate.textContent = formatDateLabel(item.date) + " — " + item.title;
   lbDownload.href = item.src;
   lbDownload.download = item.src.split("/").pop();
+  const title = encodeURIComponent(`Remove: ${item.title}`);
+  const body = encodeURIComponent(
+    `Please remove this drawing from the gallery.\n\nFile: \`${item.src}\`\nDate: ${item.date}\n\n(Do not edit the File line above — it's used to find and delete the file automatically.)`
+  );
+  lbRemove.href = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}&labels=remove-request`;
   lightbox.classList.remove("hidden");
 }
 function closeLightbox() { lightbox.classList.add("hidden"); }

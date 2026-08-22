@@ -1,0 +1,54 @@
+name: Handle removal request
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  remove:
+    if: github.event.label.name == 'remove-request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract file path from issue body
+        id: extract
+        run: |
+          FILE=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=File: `)[^`]+(?=`)' | head -1)
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Delete file and commit
+        if: steps.extract.outputs.file != ''
+        run: |
+          FILE="${{ steps.extract.outputs.file }}"
+          if [ -f "$FILE" ]; then
+            git config user.name "sonias-drawings-bot"
+            git config user.email "actions@github.com"
+            git rm "$FILE"
+            git commit -m "Remove drawing requested in #${{ github.event.issue.number }}"
+            git push
+          fi
+
+      - name: Comment and close issue
+        if: steps.extract.outputs.file != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "Removed `${{ steps.extract.outputs.file }}` from the gallery. This will disappear from the live site within a minute or two."
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: "closed"
+            });
