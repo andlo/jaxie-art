@@ -87,7 +87,7 @@ def main():
     LEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n")
 
     if not IS_CI:
-        run(["git", "-C", str(REPO), "pull", "--rebase", "-q"])
+        run(["git", "-C", str(REPO), "pull", "--rebase", "--autostash", "-q"])
     run(["git", "-C", str(REPO), "add", "-A"])
     msg = f"OneDrive sync: +{len(added)} -{len(removed)}"
     run(["git", "-C", str(REPO), "commit", "-q", "-m", msg])
