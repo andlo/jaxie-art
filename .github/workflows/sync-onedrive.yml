@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SYNC_PUSH_TOKEN }}
 
       - name: Install rclone
         run: sudo -v ; curl https://rclone.org/install.sh | sudo bash
