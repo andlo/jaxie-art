@@ -6,6 +6,9 @@ The OneDrive folder is the single source of truth:
   - Files deleted there -> removed from the gallery.
   - Files renamed there -> old name removed, new name imported
     (a rename looks like a delete + an add).
+  - A same-named .txt file next to an image (e.g. Drawing.png +
+    Drawing.txt) becomes a caption, shown in the gallery. It's kept in
+    sync too: added, edited, or removed independently of the image.
 Tracked via a JSON ledger (.onedrive-sync-ledger.json) mapping each
 OneDrive filename to where it currently lives under images/.
 Runs both locally and in GitHub Actions (uses $GITHUB_WORKSPACE if set).
@@ -35,11 +38,11 @@ def log(msg):
 def run(cmd, **kw):
     return subprocess.run(cmd, check=True, capture_output=True, text=True, **kw)
 
+
 def load_ledger():
     if LEDGER.exists():
         return json.loads(LEDGER.read_text())
     return {}
-
 
 def main():
     log("Henter fra OneDrive...")
@@ -47,20 +50,26 @@ def main():
 
     ledger = load_ledger()
 
-    current = {}
+    current = {}       # image filename -> Path
+    caption_texts = {}  # image stem -> caption text
     for f in sorted(STAGING.iterdir()):
-        if not f.is_file() or f.suffix.lower() not in EXTS:
+        if not f.is_file():
             continue
-        current[f.name] = f
+        if f.suffix.lower() in EXTS:
+            current[f.name] = f
+        elif f.suffix.lower() == ".txt":
+            caption_texts[f.stem] = f.read_text(encoding="utf-8").strip()
 
-    removed, added = [], []
+    removed, added, updated = [], [], []
 
     # Files that used to exist in OneDrive but don't anymore -> remove from site
     for name in list(ledger.keys()):
         if name not in current:
-            old_path = REPO / ledger[name]["path"]
-            if old_path.exists():
-                run(["git", "-C", str(REPO), "rm", "-q", str(old_path)])
+            entry = ledger[name]
+            for key in ("path", "caption_path"):
+                p = entry.get(key)
+                if p and (REPO / p).exists():
+                    run(["git", "-C", str(REPO), "rm", "-q", str(REPO / p)])
             del ledger[name]
             removed.append(name)
             log(f"Fjernet (ikke længere i OneDrive): {name}")
@@ -76,11 +85,44 @@ def main():
         if dest.exists():
             dest = day_dir / f"{f.stem}-onedrive{f.suffix}"
         shutil.copy2(f, dest)
-        ledger[name] = {"path": str(dest.relative_to(REPO))}
+        entry = {"path": str(dest.relative_to(REPO))}
+
+        caption = caption_texts.get(f.stem)
+        if caption:
+            cap_dest = dest.with_suffix(".txt")
+            cap_dest.write_text(caption, encoding="utf-8")
+            entry["caption_path"] = str(cap_dest.relative_to(REPO))
+            entry["caption_text"] = caption
+
+        ledger[name] = entry
         added.append(name)
         log(f"Importeret: {name} -> {dest.relative_to(REPO)}")
 
-    if not removed and not added:
+    # Existing images -> caption may have been added, edited, or removed
+    for name, f in current.items():
+        if name not in ledger or name in added:
+            continue
+        entry = ledger[name]
+        new_caption = caption_texts.get(f.stem)
+        old_caption = entry.get("caption_text")
+        if new_caption == old_caption:
+            continue
+
+        img_path = REPO / entry["path"]
+        cap_dest = img_path.with_suffix(".txt")
+        if new_caption:
+            cap_dest.write_text(new_caption, encoding="utf-8")
+            entry["caption_path"] = str(cap_dest.relative_to(REPO))
+            entry["caption_text"] = new_caption
+        else:
+            if cap_dest.exists():
+                run(["git", "-C", str(REPO), "rm", "-q", str(cap_dest)])
+            entry.pop("caption_path", None)
+            entry.pop("caption_text", None)
+        updated.append(name)
+        log(f"Billedtekst opdateret: {name}")
+
+    if not removed and not added and not updated:
         log("Ingen ændringer.")
         return
 
@@ -89,7 +131,7 @@ def main():
     if not IS_CI:
         run(["git", "-C", str(REPO), "pull", "--rebase", "--autostash", "-q"])
     run(["git", "-C", str(REPO), "add", "-A"])
-    msg = f"OneDrive sync: +{len(added)} -{len(removed)}"
+    msg = f"OneDrive sync: +{len(added)} -{len(removed)} ~{len(updated)}"
     run(["git", "-C", str(REPO), "commit", "-q", "-m", msg])
     run(["git", "-C", str(REPO), "push"])
     log(f"Pushet ({msg}). Deploy sker automatisk.")

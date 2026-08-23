@@ -43,7 +43,9 @@ def main():
                     if f.suffix.lower() not in EXTS:
                         continue
                     rel = f.relative_to(ROOT).as_posix()
-                    items.append({
+                    caption_file = f.with_suffix(".txt")
+                    caption = caption_file.read_text(encoding="utf-8").strip() if caption_file.exists() else ""
+                    item = {
                         "src": rel,
                         "date": d.isoformat(),
                         "year": d.year,
@@ -53,7 +55,10 @@ def main():
                         "weekLabel": f"Week {d.isocalendar()[1]} \u2014 {iso_week_range(d)}",
                         "day": d.strftime("%A"),
                         "title": f.stem,
-                    })
+                    }
+                    if caption:
+                        item["caption"] = caption
+                    items.append(item)
 
     items.sort(key=lambda x: (x["date"], x["src"]))
     items.reverse()  # nyeste først

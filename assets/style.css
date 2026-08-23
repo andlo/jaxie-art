@@ -149,3 +149,10 @@ body {
   color: #a09880;
   padding: 3rem 1rem;
 }
+
+.caption {
+  font-style: italic;
+  color: #f0ece0;
+  max-width: 500px;
+  margin: .2rem auto .4rem;
+}

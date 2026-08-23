@@ -119,6 +119,7 @@ const REPO = "andlo/jaxie-art";
 const lightbox = document.getElementById("lightbox");
 const lbImg = document.getElementById("lightbox-img");
 const lbDate = document.getElementById("lightbox-date");
+const lbCaption = document.getElementById("lightbox-caption");
 const lbDownload = document.getElementById("lightbox-download");
 const lbRemove = document.getElementById("lightbox-remove");
 
@@ -126,6 +127,8 @@ function openLightbox(item) {
   lbImg.src = item.src;
   lbImg.alt = item.title;
   lbDate.textContent = formatDateLabel(item.date) + " — " + item.title;
+  lbCaption.textContent = item.caption || "";
+  lbCaption.style.display = item.caption ? "block" : "none";
   lbDownload.href = item.src;
   lbDownload.download = item.src.split("/").pop();
   const title = encodeURIComponent(`Remove: ${item.title}`);
