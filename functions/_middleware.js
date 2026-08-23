@@ -1,13 +1,17 @@
 // Password-protects the whole site with HTTP Basic Auth.
-// Username/password come from Cloudflare Pages environment variables
-// (set in the dashboard, not committed to git).
+// Multiple username/password pairs, stored as JSON in the SITE_USERS
+// environment variable (set in the Cloudflare dashboard, not in git):
+//   {"sonia":"...", "andreas":"...", "guest":"..."}
 export async function onRequest(context) {
   const auth = context.request.headers.get("Authorization");
-  const EXPECTED_USER = context.env.SITE_USERNAME || "sonia";
-  const EXPECTED_PASS = context.env.SITE_PASSWORD;
+  let users = {};
+  try {
+    users = JSON.parse(context.env.SITE_USERS || "{}");
+  } catch {
+    return new Response("Site not configured", { status: 500 });
+  }
 
-  if (!EXPECTED_PASS) {
-    // No password configured — fail closed rather than open.
+  if (Object.keys(users).length === 0) {
     return new Response("Site not configured", { status: 500 });
   }
 
@@ -18,7 +22,7 @@ export async function onRequest(context) {
       const idx = decoded.indexOf(":");
       const user = decoded.slice(0, idx);
       const pass = decoded.slice(idx + 1);
-      if (user === EXPECTED_USER && pass === EXPECTED_PASS) {
+      if (users[user] && users[user] === pass) {
         return context.next();
       }
     }
