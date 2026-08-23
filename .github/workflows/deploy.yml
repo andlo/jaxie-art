@@ -15,8 +15,12 @@ jobs:
           python-version: "3.12"
       - name: Byg manifest.json
         run: python3 scripts/build_manifest.py
+      - name: Byg deploy-mappe (uden arkivet)
+        run: |
+          mkdir _site
+          rsync -a --exclude='archive-original-import' --exclude='_site' --exclude='.git' --exclude='.github' ./ _site/
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=jaxie-drawings --branch=master
+          command: pages deploy _site --project-name=jaxie-drawings --branch=master
