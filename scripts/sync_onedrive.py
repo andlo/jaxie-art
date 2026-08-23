@@ -43,7 +43,7 @@ def load_ledger():
 
 def main():
     log("Henter fra OneDrive...")
-    run(["rclone", "copy", REMOTE, str(STAGING), "--transfers", "8"])
+    run(["rclone", "sync", REMOTE, str(STAGING), "--transfers", "8"])
 
     ledger = load_ledger()
 
