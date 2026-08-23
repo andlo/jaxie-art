@@ -7,7 +7,7 @@ Password-beskyttet statisk galleri hostet med Cloudflare Pages.
 
 1. Læg billedfilerne i `images/ÅÅÅÅ/MM/DD/` — f.eks. `images/2026/08/22/tegning1.png`
    (opret mapperne hvis de ikke findes). Nemmeste vej: naviger direkte til
-   `github.com/andlo/jaxie-drawings/upload/master/images/ÅÅÅÅ/MM/DD` og træk
+   `github.com/andlo/jaxie-art/upload/master/images/ÅÅÅÅ/MM/DD` og træk
    filer ind — ingen kloning nødvendig.
 2. `git push` (eller commit direkte i browseren) — en GitHub Action bygger
    automatisk `manifest.json` og deployer til Cloudflare Pages.

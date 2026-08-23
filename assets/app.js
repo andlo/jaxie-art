@@ -115,7 +115,7 @@ function makeThumb(item) {
   return div;
 }
 
-const REPO = "andlo/jaxie-drawings";
+const REPO = "andlo/jaxie-art";
 const lightbox = document.getElementById("lightbox");
 const lbImg = document.getElementById("lightbox-img");
 const lbDate = document.getElementById("lightbox-date");

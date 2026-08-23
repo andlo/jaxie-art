@@ -30,6 +30,6 @@ export async function onRequest(context) {
 
   return new Response("Authentication required", {
     status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="Jaxie\'s Drawings"' },
+    headers: { "WWW-Authenticate": 'Basic realm="Jaxie\'s Art"' },
   });
 }

@@ -14,9 +14,9 @@ import tempfile
 from pathlib import Path
 from datetime import datetime
 
-REPO = Path(os.environ.get("GITHUB_WORKSPACE", "/home/andlo/Work/jaxie-drawings"))
+REPO = Path(os.environ.get("GITHUB_WORKSPACE", "/home/andlo/Work/jaxie-art"))
 IS_CI = "GITHUB_WORKSPACE" in os.environ
-STAGING = Path(tempfile.mkdtemp()) if IS_CI else Path("/home/andlo/staging-jaxie-drawings")
+STAGING = Path(tempfile.mkdtemp()) if IS_CI else Path("/home/andlo/staging-jaxie-art")
 STAGING.mkdir(exist_ok=True)
 LEDGER = REPO / ".onedrive-sync-ledger.txt"
 EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}

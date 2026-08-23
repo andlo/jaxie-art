@@ -30,7 +30,7 @@ jobs:
         run: |
           FILE="${{ steps.extract.outputs.file }}"
           if [ -f "$FILE" ]; then
-            git config user.name "jaxie-drawings-bot"
+            git config user.name "jaxie-art-bot"
             git config user.email "actions@github.com"
             git rm "$FILE"
             git commit -m "Remove drawing (approved in #${{ github.event.issue.number }})"
