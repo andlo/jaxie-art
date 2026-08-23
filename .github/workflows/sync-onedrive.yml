@@ -1,0 +1,35 @@
+name: Sync new drawings from OneDrive
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install rclone
+        run: sudo -v ; curl https://rclone.org/install.sh | sudo bash
+
+      - name: Configure rclone
+        env:
+          RCLONE_CONF: ${{ secrets.ONEDRIVE_RCLONE_CONF }}
+        run: |
+          mkdir -p ~/.config/rclone
+          echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync
+        run: |
+          git config --global user.name "jaxie-drawings-bot"
+          git config --global user.email "actions@github.com"
+          python3 scripts/sync_onedrive.py
