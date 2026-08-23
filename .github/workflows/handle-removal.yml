@@ -21,8 +21,10 @@ jobs:
 
       - name: Extract file path from issue body
         id: extract
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
-          FILE=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=File: `)[^`]+(?=`)' | head -1)
+          FILE=$(echo "$ISSUE_BODY" | grep -oP '(?<=File: `)[^`]+(?=`)' | head -1)
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
 
       - name: Delete file and commit
