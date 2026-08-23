@@ -155,4 +155,8 @@ body {
   color: #f0ece0;
   max-width: 500px;
   margin: .2rem auto .4rem;
+  white-space: pre-line;
+  line-height: 1.5;
+  max-height: 40vh;
+  overflow-y: auto;
 }
