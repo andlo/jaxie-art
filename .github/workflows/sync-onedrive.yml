@@ -2,7 +2,7 @@ name: Sync new drawings from OneDrive
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
