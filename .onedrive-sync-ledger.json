@@ -1649,6 +1649,9 @@
   "cheese meep.png": {
     "path": "images/2026/04/25/cheese meep.png"
   },
+  "chicken.png": {
+    "path": "images/2026/08/29/chicken.png"
+  },
   "child au.png": {
     "path": "images/2026/05/16/child au.png"
   },
@@ -1663,6 +1666,12 @@
   },
   "cookie cats.png": {
     "path": "images/2026/03/02/cookie cats.png"
+  },
+  "creature 2.png": {
+    "path": "images/2026/05/20/creature 2.png"
+  },
+  "creatures.png": {
+    "path": "images/2026/05/18/creatures.png"
   },
   "crk Bill Cipher.png": {
     "path": "images/2026/05/17/crk Bill Cipher.png"
