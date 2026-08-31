@@ -209,6 +209,9 @@
   "Brothers.png": {
     "path": "images/2025/06/16/Brothers.png"
   },
+  "Brown Sugar Cookie.png": {
+    "path": "images/2026/08/31/Brown Sugar Cookie.png"
+  },
   "CHASSLE Gravity Falls OC.png": {
     "path": "images/2026/05/20/CHASSLE Gravity Falls OC.png"
   },
@@ -378,6 +381,8 @@
     "path": "images/2026/02/26/Eclipse.png"
   },
   "Equinox (OC).png": {
+    "caption_path": "images/2026/02/13/Equinox (OC).txt",
+    "caption_text": "this is an older drawing i changed a few things about, so it shows up as a more recent date than it actually is. though you can probably guess it from the older art style this isn't one of my newer drawings, haha.",
     "path": "images/2026/02/13/Equinox (OC).png"
   },
   "Eternal Sugar bird.png": {
@@ -1149,6 +1154,8 @@
     "path": "images/2026/07/25/PXL_20260725_163055908.jpg"
   },
   "PXL_20260725_224545526.jpg": {
+    "caption_path": "images/2026/07/25/PXL_20260725_224545526.txt",
+    "caption_text": "credits to Creammcqueen for letting me draw her character, Caden.",
     "path": "images/2026/07/25/PXL_20260725_224545526.jpg"
   },
   "PXL_20260727_221417201.jpg": {
@@ -1270,6 +1277,12 @@
   },
   "PXL_20260828_105647571.jpg": {
     "path": "images/2026/08/28/PXL_20260828_105647571.jpg"
+  },
+  "PXL_20260831_095526604.jpg": {
+    "path": "images/2026/08/31/PXL_20260831_095526604.jpg"
+  },
+  "PXL_20260831_095612922.jpg": {
+    "path": "images/2026/08/31/PXL_20260831_095612922.jpg"
   },
   "Parasite Gummy Cookie.png": {
     "path": "images/2026/06/04/Parasite Gummy Cookie.png"
@@ -1509,6 +1522,8 @@
     "path": "images/2025/02/03/Team Chaos.png"
   },
   "Tempus (OC).png": {
+    "caption_path": "images/2026/02/13/Tempus (OC).txt",
+    "caption_text": "this is an older drawing i changed a few things about, so it shows up as a more recent date than it actually is. though you can probably guess it from the older art style this isn't one of my newer drawings, haha.",
     "path": "images/2026/02/13/Tempus (OC).png"
   },
   "The Archivists (toh fan art).png": {
@@ -1608,6 +1623,8 @@
     "path": "images/2026/03/29/berry family birds.png"
   },
   "berry family.png": {
+    "caption_path": "images/2026/03/31/berry family.txt",
+    "caption_text": "credits to Creammcqueen for the character on the right, Blueberry Tart.",
     "path": "images/2026/03/31/berry family.png"
   },
   "bird person i guess.png": {
@@ -1774,6 +1791,9 @@
   },
   "horse.png": {
     "path": "images/2025/09/09/horse.png"
+  },
+  "horsey.jpg": {
+    "path": "images/2026/08/31/horsey.jpg"
   },
   "hurt meep.png": {
     "path": "images/2026/04/15/hurt meep.png"
