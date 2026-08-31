@@ -130,6 +130,11 @@ def main():
 
     if not IS_CI:
         run(["git", "-C", str(REPO), "pull", "--rebase", "--autostash", "-q"])
+    else:
+        # Guard against a concurrent scheduled run having already pushed
+        # in the short window since checkout, even with concurrency
+        # control on the workflow.
+        run(["git", "-C", str(REPO), "pull", "--rebase", "-q"])
     run(["git", "-C", str(REPO), "add", "-A"])
     msg = f"OneDrive sync: +{len(added)} -{len(removed)} ~{len(updated)}"
     run(["git", "-C", str(REPO), "commit", "-q", "-m", msg])
@@ -141,5 +146,5 @@ if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        log(f"FEJL: {e.cmd} -> {e.stderr}")
+        log(f"FEJL: {e.cmd} -> stdout={e.stdout!r} stderr={e.stderr!r}")
         sys.exit(1)
