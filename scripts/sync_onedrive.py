@@ -45,6 +45,14 @@ def load_ledger():
     return {}
 
 def main():
+    # Pull first, before touching the working tree at all — once we start
+    # copying files in / running `git rm`, the tree is dirty and a later
+    # `pull --rebase` will refuse to run.
+    if not IS_CI:
+        run(["git", "-C", str(REPO), "pull", "--rebase", "--autostash", "-q"])
+    else:
+        run(["git", "-C", str(REPO), "pull", "--rebase", "-q"])
+
     log("Henter fra OneDrive...")
     run(["rclone", "sync", REMOTE, str(STAGING), "--transfers", "8"])
 
@@ -128,13 +136,6 @@ def main():
 
     LEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n")
 
-    if not IS_CI:
-        run(["git", "-C", str(REPO), "pull", "--rebase", "--autostash", "-q"])
-    else:
-        # Guard against a concurrent scheduled run having already pushed
-        # in the short window since checkout, even with concurrency
-        # control on the workflow.
-        run(["git", "-C", str(REPO), "pull", "--rebase", "-q"])
     run(["git", "-C", str(REPO), "add", "-A"])
     msg = f"OneDrive sync: +{len(added)} -{len(removed)} ~{len(updated)}"
     run(["git", "-C", str(REPO), "commit", "-q", "-m", msg])
