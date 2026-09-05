@@ -182,6 +182,9 @@
   "Blackcurrant bird.png": {
     "path": "images/2026/03/21/Blackcurrant bird.png"
   },
+  "Blackcurrant info sheet.png": {
+    "path": "images/2025/10/15/Blackcurrant info sheet.png"
+  },
   "Blackcurrant redesign.png": {
     "path": "images/2026/02/17/Blackcurrant redesign.png"
   },
@@ -208,9 +211,6 @@
   },
   "Brothers.png": {
     "path": "images/2025/06/16/Brothers.png"
-  },
-  "Brown Sugar Cookie.png": {
-    "path": "images/2026/08/31/Brown Sugar Cookie.png"
   },
   "CHASSLE Gravity Falls OC.png": {
     "path": "images/2026/05/20/CHASSLE Gravity Falls OC.png"
@@ -485,6 +485,8 @@
     "path": "images/2025/04/06/Jaxie (OC).png"
   },
   "Jaxie Without Mask.png": {
+    "caption_path": "images/2025/05/30/Jaxie Without Mask.txt",
+    "caption_text": "this is an old design and is no longer canon.",
     "path": "images/2025/05/30/Jaxie Without Mask.png"
   },
   "Jaxie and Eclipse (Inventory).png": {
@@ -558,6 +560,9 @@
   },
   "Nilly with an axe.png": {
     "path": "images/2025/12/11/Nilly with an axe.png"
+  },
+  "Not-Deer.png": {
+    "path": "images/2025/09/05/Not-Deer.png"
   },
   "OC art (Jaxie & Eclipse).png": {
     "path": "images/2025/03/27/OC art (Jaxie & Eclipse).png"
@@ -1284,6 +1289,9 @@
   "PXL_20260831_095612922.jpg": {
     "path": "images/2026/08/31/PXL_20260831_095612922.jpg"
   },
+  "PXL_20260902_095947247.jpg": {
+    "path": "images/2026/09/02/PXL_20260902_095947247.jpg"
+  },
   "Parasite Gummy Cookie.png": {
     "path": "images/2026/06/04/Parasite Gummy Cookie.png"
   },
@@ -1556,6 +1564,12 @@
   "Tulip.png": {
     "path": "images/2025/08/16/Tulip.png"
   },
+  "Ulti Cookie info.png": {
+    "path": "images/2026/09/04/Ulti Cookie info.png"
+  },
+  "Ultimate Cookie.png": {
+    "path": "images/2026/09/04/Ultimate Cookie.png"
+  },
   "Vanilla Sheep form.png": {
     "path": "images/2025/09/19/Vanilla Sheep form.png"
   },
@@ -1771,6 +1785,15 @@
   "glisten (animal au design).png": {
     "path": "images/2026/03/02/glisten (animal au design).png"
   },
+  "glitch.png": {
+    "path": "images/2026/01/02/glitch.png"
+  },
+  "golden cracks.png": {
+    "path": "images/2025/09/15/golden cracks.png"
+  },
+  "goodbye Lily.png": {
+    "path": "images/2026/03/14/goodbye Lily.png"
+  },
   "group photo!.png": {
     "path": "images/2026/05/05/group photo!.png"
   },
@@ -1797,6 +1820,9 @@
   },
   "hurt meep.png": {
     "path": "images/2026/04/15/hurt meep.png"
+  },
+  "infection.png": {
+    "path": "images/2026/01/06/infection.png"
   },
   "injured sprite 1.png": {
     "path": "images/2026/02/26/injured sprite 1.png"
@@ -1885,6 +1911,9 @@
   "pfp (2).png": {
     "path": "images/2026/03/14/pfp (2).png"
   },
+  "pfp 3.png": {
+    "path": "images/2026/09/03/pfp 3.png"
+  },
   "phone background 2.png": {
     "path": "images/2026/02/05/phone background 2.png"
   },
@@ -1896,6 +1925,9 @@
   },
   "posessors.png": {
     "path": "images/2025/08/29/posessors.png"
+  },
+  "purelily afternoon walk.png": {
+    "path": "images/2026/09/03/purelily afternoon walk.png"
   },
   "purelily birds.png": {
     "path": "images/2026/03/22/purelily birds.png"
@@ -1966,6 +1998,9 @@
   "surprised sprite 1.png": {
     "path": "images/2026/02/26/surprised sprite 1.png"
   },
+  "the flying penguin.png": {
+    "path": "images/2026/05/27/the flying penguin.png"
+  },
   "the queen.png": {
     "path": "images/2026/08/09/the queen.png"
   },
@@ -1987,6 +2022,9 @@
   "uhh.png": {
     "path": "images/2025/08/28/uhh.png"
   },
+  "updated Jaxie pfp.png": {
+    "path": "images/2026/09/04/updated Jaxie pfp.png"
+  },
   "void eyes.png": {
     "path": "images/2026/04/03/void eyes.png"
   },
@@ -1998,6 +2036,9 @@
   },
   "wyvern baby.png": {
     "path": "images/2026/03/20/wyvern baby.png"
+  },
+  "wyvern sketch.png": {
+    "path": "images/2026/03/24/wyvern sketch.png"
   },
   "wyvern.png": {
     "path": "images/2026/05/17/wyvern.png"
