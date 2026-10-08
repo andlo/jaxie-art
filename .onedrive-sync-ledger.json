@@ -245,6 +245,8 @@
     "path": "images/2026/05/12/Candied Grape.png"
   },
   "Candy Apple Cookie.png": {
+    "caption_path": "images/2026/01/16/Candy Apple Cookie.txt",
+    "caption_text": "an older drawing i cropped due to some unfinished stuff i didn't want that ended up way higher up in the dates than it should due to this edit.",
     "path": "images/2026/01/16/Candy Apple Cookie.png"
   },
   "Candy Luck & Sweetie Luck.png": {
@@ -1344,6 +1346,9 @@
   },
   "PXL_20261002_095608860.jpg": {
     "path": "images/2026/10/02/PXL_20261002_095608860.jpg"
+  },
+  "PXL_20261003_223327859.jpg": {
+    "path": "images/2026/10/03/PXL_20261003_223327859.jpg"
   },
   "Parasite Gummy Cookie.png": {
     "path": "images/2026/06/04/Parasite Gummy Cookie.png"
